@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>posts</title>
+{% endblock title %}
+{% block content %}
+<h1>posts</h1>
+<hr>
+{% for post in post_list %}
+<p>{{post.title}}</p>
+{% endfor %}
+{% endblock content %}

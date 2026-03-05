@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm
-from django.contrib.auth import authenticate ,login 
+from django.contrib.auth import authenticate ,login,logout
+from .models import Post
 # Create your views here.
 #1)functions    2)class
 
@@ -28,7 +29,14 @@ def user_login(request):
         else:
           error ='invalid username or password'
           return render(request,'login.html',{'error':error})
+        
+def user_logout(request):
+    logout(request)
+    return redirect('home')
 
+def display_post(request):
+    post_list = Post.objects.all()  #select * from
+    return redirect(request, 'display-post.html'),{'post_list':post_list}
         
 def register(request):
  form = UserRegistrationForm()           # it will create a empty registration form 
@@ -38,8 +46,4 @@ def register(request):
         # request.POST contains data
         form = UserRegistrationForm(request.POST)   # form filled with userdata
 
-        if form.is_valid():
-            form.save()   # create user
-            return redirect('login')
-        else:
-            return render(request,'register.html',{'form':form})
+        
