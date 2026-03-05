@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>home</title>
 </head>
 <body>
-    <h1>Hi {{ request.user.username }},Welcome to my Website</h1>
-    <a href="{% url 'logout' %}">logout</a>
-    {% for fruit in fruits %}
-    <p> {{ fruit }}</p>
-    {% endfor %}
+
+    {% extends 'base.html' %}
+    {% block content %}
+    
+      <h1>Hi {{reruest.user.username}}, welcome to my website!!!</h1>
+      <a href="{% url ''logout}">Logout</a>
+
+    {% endblock content %}
+
+      {% for fruit in fruits %}
+      <p>{{ fruit }}</p>
+      {% endfor %}
 
 </body>
 </html>
+
