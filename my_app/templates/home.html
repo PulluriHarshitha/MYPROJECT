@@ -6,7 +6,8 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>Hi {{name}},Welcome to my Website</h1>
+    <h1>Hi {{ request.user.username }},Welcome to my Website</h1>
+    
     {% for fruit in fruits %}
     <p> {{ fruit }}</p>
     {% endfor %}

@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
+    <title>Document</title>
 </head>
 <body>
-    <form method="post">
-
-    </form>
-    <h1>LOGIN PAGE</h1>
+    <h1> LOGIN PAGE </h1>
     <hr>
+    <form  method="POST">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text",name='username',id='username'><br>
+        <label for="password">Password</label>
+        <input type="text",name='password',id='password'><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if error  %}
+            <p sytle ="color:red;">{{error}}</p>
+    {% endif %}
 </body>
 </html>
