@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Hi {{ request.user.username }},Welcome to my Website</h1>
-    
+    <a href="{% url 'logout' %}">logout</a>
     {% for fruit in fruits %}
     <p> {{ fruit }}</p>
     {% endfor %}
