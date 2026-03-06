@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm , PostForm
 from django.contrib.auth import authenticate ,login,logout
 from .models import Post
+
 # Create your views here.
 #1)functions    2)class
 
@@ -49,3 +50,20 @@ def register(request):
 def read_post(request, id):
     post = Post.objects.get(pk=id) #get single  record based on id 
     return render(request, 'read-post.html',{'post':post})
+
+def add_post(request):
+    form = PostForm() #empty postform
+    if request.method == 'GET':
+        return render(request,'add-post.html',{'form':form})
+
+
+    if request.method == 'POST':
+        #request.post contains from data
+         form = PostForm(request.POST , request.FILES)  
+         if form.is_valid():
+             post = form.save(commit=False)  
+             post.author =  request.user  #assign user as author
+             post.save() #create post
+             return redirect('display-post')
+         else:
+             return render(request,'add-post.html', {'form':form})

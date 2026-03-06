@@ -14,7 +14,7 @@
   <div class="card-body">
     <h5 class="card-title">{{ post.title }}</h5>
     <p class="card-text">Author: {{ post.author }} | Upadated on: {{ post.updated }}</p>
-    <p class="card-text">{{ post.subtitle | truncatechar:4 }}</p>
+    <p class="card-text">{{ post.subtitle | truncatechars:4 }}</p>
     <p class="card-text">{{ post.content }}</p>
     <a href="{% url 'read-post' id=post.id %}" class="btn btn-primary">Read more</a>
   </div>
