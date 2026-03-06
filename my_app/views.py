@@ -35,8 +35,8 @@ def user_logout(request):
     return redirect('home')
 
 def display_post(request):
-    post_list = Post.objects.all()  #select * from
-    return redirect(request, 'display-post.html'),{'post_list':post_list}
+    post_list = Post.objects.all().order_by('updated_at')  #select * from post order
+    return render(request, 'display-post.html',{'post_list':post_list})
         
 def register(request):
  form = UserRegistrationForm()           # it will create a empty registration form 
