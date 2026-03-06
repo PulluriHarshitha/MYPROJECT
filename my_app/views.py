@@ -46,4 +46,6 @@ def register(request):
         # request.POST contains data
         form = UserRegistrationForm(request.POST)   # form filled with userdata
 
-        
+def read_post(request, id):
+    post = Post.objects.get(pk=id) #get single  record based on id 
+    return render(request, 'read-post.html',{'post':post})
