@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import UserRegistrationForm , PostForm
 from django.contrib.auth import authenticate ,login,logout
 from .models import Post
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from django.http import HttpResponse
 
 # Create your views here.
 #1)functions    2)class
@@ -48,7 +51,11 @@ def register(request):
         form = UserRegistrationForm(request.POST)   # form filled with userdata
 
 def read_post(request, id):
-    post = Post.objects.get(pk=id) #get single  record based on id 
+    try:
+           post = Post.objects.get(pk=id) #get single  record based on id 
+    except Post.DoesNotExist:
+      return redirect('display-post')
+    
     return render(request, 'read-post.html',{'post':post})
 
 def add_post(request):
@@ -67,10 +74,42 @@ def add_post(request):
              return redirect('display-post')
          else:
              return render(request,'add-post.html', {'form':form})
-         
+
+@login_required(login_url='login')       
 def update_post(request, id):
-    post = Post.objects.get(pk=id)
+    try:
+        post = Post.objects.get(pk=id)
+    except Post.DoesNotExists:
+     return redirect ('display-post')
+    if request.user != post.author:
+        return HttpResponse('unauthorized access!')
+    
     form = PostForm(instance=post)
 
     if request.method == 'GET':
         return render(request,'update-post.html',{'form': form})
+
+    if request.method == 'POST':
+      form = PostForm(request.POST,request.FILES, instance=post)    
+
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.author = request.user
+        post.updated_at = timezone.now() 
+        post.save()
+        form = PostForm()
+        
+        return redirect('display-post')
+    else:
+        return render(request,'update-post.html',{'form': form})
+    
+def delete_post(request, id):
+    try:
+        post = Post.objects.get(pk=id)
+    except post.DoesNotExists:
+        return redirect('display-post') 
+    if request.user != post.author:
+        return redirect('display-post')
+    
+    post.delete()
+    return redirect('display-post')

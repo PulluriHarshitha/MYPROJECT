@@ -33,7 +33,8 @@ urlpatterns = [
     path('display-post/',views.display_post, name='display-post'),
     path('read-post/<int:id>/',views.read_post, name='read-post'),
     path('add-post/',views.add_post, name ='add-post'),
-    path('update-post</int:id>/',views.update_post, name='update-post'),
+    path('update-post/<int:id>/',views.update_post, name='update-post'),
+    path('delete-post/<int:id>/',views.delete_post, name='delete-post'),
     
     ]
 if settings.DEBUG: 
