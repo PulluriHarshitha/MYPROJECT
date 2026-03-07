@@ -1,3 +1,17 @@
-body {
-     background-color: red;
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color:#f2f2f2;
+}
+
+.login-form
+{
+    background:white;
+    padding:30px;
+    border-radius:8px;
+    box-shadow:0px 0px 10px gray;
+    text-align:center;
 }

@@ -15,6 +15,8 @@
     <p class="card-text">{{ post.content }}</p>
     <p class="card-text">{{ post.content | linebreaks }}</p>    
     <a href="{% url 'display-post' %}" class="btn btn-primary">Go back</a>
+    <a href="{% url 'update-post' post.id %}" class="btn btn-primary>"Update</a>
+    <a href="#" class="'btn btn-danger">Delete</a>
   </div>
 </div>
 

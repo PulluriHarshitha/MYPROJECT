@@ -67,3 +67,10 @@ def add_post(request):
              return redirect('display-post')
          else:
              return render(request,'add-post.html', {'form':form})
+         
+def update_post(request, id):
+    post = Post.objects.get(pk=id)
+    form = PostForm(instance=post)
+
+    if request.method == 'GET':
+        return render(request,'update-post.html',{'form': form})

@@ -32,7 +32,8 @@ urlpatterns = [
     path('logout-post/',views.user_logout, name='logout'),
     path('display-post/',views.display_post, name='display-post'),
     path('read-post/<int:id>/',views.read_post, name='read-post'),
-    path('add-post/',views.add_post, name ='add-post')
+    path('add-post/',views.add_post, name ='add-post'),
+    path('update-post</int:id>/',views.update_post, name='update-post'),
     
     ]
 if settings.DEBUG: 
