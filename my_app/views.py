@@ -19,7 +19,8 @@ def home(request):
 def user_login(request):
     if request.method=='GET':
         return render(request,'login.html')
-    if request.method=='POST':          # after form  submission
+    if request.method=='POST':        
+  # after form  submission
         #request.POST contaion form data
 
         username =request.POST.get('username')
