@@ -43,12 +43,15 @@ def display_post(request):
     return render(request, 'display-post.html',{'post_list':post_list})
         
 def register(request):
- form = UserRegistrationForm()           # it will create a empty registration form 
+ form = UserRegistrationForm()        
+ # it will create a empty registration form 
  if request.method =='GET':
          return render(request,'register.html',{'form':form})
+
  if request.method =='POST':
         # request.POST contains data
-        form = UserRegistrationForm(request.POST)   # form filled with userdata
+        form = UserRegistrationForm(request.POST)   
+# form filled with userdata
 
 def read_post(request, id):
     try:
